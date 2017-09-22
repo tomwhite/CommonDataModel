@@ -56,3 +56,12 @@ impala-shell -f OMOP_Parquet.sql
 impala-shell -d omop_cdm_parquet -q 'SELECT COUNT(1) FROM concept'
 impala-shell -d omop_cdm_parquet -q 'SELECT COUNT(1) FROM person'
 ```
+
+6. (Optional) Convert to Kudu storage.
+
+```bash
+impala-shell -q 'CREATE DATABASE omop_cdm_kudu'
+impala-shell -f OMOP_Kudu.sql --var=KUDU_MASTER=bottou04.sjc.cloudera.com # substitute your Kudu master hostname here
+impala-shell -d omop_cdm_kudu -q 'SELECT COUNT(1) FROM concept'
+impala-shell -d omop_cdm_kudu -q 'SELECT COUNT(1) FROM person'
+```
